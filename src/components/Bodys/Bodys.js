@@ -1,6 +1,5 @@
 // Body.js
-import "./SearchBar.css";
-import SearchBar from './SearchBar';
+import SearchBar from './SearchBar/SearchBar';
 
 function Body() {
   const testedados = [
