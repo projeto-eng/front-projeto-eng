@@ -1,7 +1,7 @@
 // SearchBar.js
 import React, { useState } from 'react';
 import './SearchBar.css';
-import lupaIcon from '../imgs/lupa.png'; // Verifique se a extensão está correta
+import lupaIcon from './imgs/lupa.png'; 
 
 function SearchBar({ data = [], cities = {}, states = [] }) {
   const [query, setQuery] = useState('');

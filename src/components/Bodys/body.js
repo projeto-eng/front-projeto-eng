@@ -1,6 +1,7 @@
 // Body.js
-import "./SearchBar.css";
-import SearchBar from './SearchBar';
+
+import SearchBar from './SearchBar/SearchBar';
+//import IndexBody from './InitScreen/IndexBody';
 
 function Body() {
   const testedados = [
@@ -17,6 +18,7 @@ function Body() {
   const estados = Object.keys(cidades);
 
   return (
+    
     <div className="search">
       <h1>Barra de Pesquisa</h1>
       <SearchBar data={testedados} cities={cidades} states={estados}/>
