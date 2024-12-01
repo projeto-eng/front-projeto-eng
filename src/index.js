@@ -8,7 +8,6 @@ import Team from './components/team/Team';
 import Services from './components/Services/Services';
 import WhyUs from './components/why-us/why-us';
 import Cadastro from './components/Cadastro/Cadastro';
-import Body from "./components/Bodys/body"
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals'
