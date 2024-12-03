@@ -1,10 +1,12 @@
+let instance;
+
 class ServerService {
     constructor(baseURL = 'http://127.0.0.1:8080') {
-        if (ServerService.instance) {
-            return ServerService.instance;
+        if (instance) {
+            return instance;
         }
         this.baseURL = baseURL;
-        ServerService.instance = this;
+        instance = this;
     }
 
     async request(endpoint, method = 'GET', body = null, headers = {}) {
@@ -49,4 +51,6 @@ class ServerService {
     }
 }
 
-export default ServerService;
+let ServerServiceInstance = Object.freeze(new ServerService());
+
+export default ServerServiceInstance;

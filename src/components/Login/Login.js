@@ -1,15 +1,14 @@
 // Login.js
 import React, { useState } from 'react';
 import './Login.css';
-import ServerService from '../../services/ServerService';
-import instance from '../../services/LoginService';
+import server from '../../services/ServerService';
+import LoginService from '../../services/LoginService';
 import { useNavigate } from 'react-router-dom';
 
 function Login() {
-  const server = new ServerService();
   const navigate = useNavigate();
 
-  if (instance.isLoggedIn) {
+  if (LoginService.isLoggedIn) {
     window.location.href = '/';
   }
 
@@ -33,7 +32,7 @@ function Login() {
       }
 
       // Handle successful login 
-      instance.login(response.id);
+      LoginService.login(response.id);
       navigate('/');
     } catch (error) {
       console.error(error);

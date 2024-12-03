@@ -3,20 +3,20 @@ import "popper.js";
 import React, { useState, useEffect } from "react";
 
 import { NavLink } from "react-router-dom";
-import loginServiceInstance from "../../services/LoginService";
+import loginService from "../../services/LoginService";
 
 function Header() {
-  const [isLoggedIn, setIsLoggedIn] = useState(loginServiceInstance.isLoggedIn);
+  const [isLoggedIn, setIsLoggedIn] = useState(loginService.isLoggedIn);
 
   useEffect(() => {
     const handleLoginChange = () => {
-      setIsLoggedIn(loginServiceInstance.isLoggedIn);
+      setIsLoggedIn(loginService.isLoggedIn);
     };
 
-    loginServiceInstance.subscribe(handleLoginChange);
+    loginService.subscribe(handleLoginChange);
 
     return () => {
-      loginServiceInstance.subscribers = loginServiceInstance.subscribers.filter(
+      loginService.subscribers = loginService.subscribers.filter(
         (subscriber) => subscriber !== handleLoginChange
       );
     };
@@ -78,7 +78,7 @@ function Header() {
                     <>
                       <li className="nav-item">
                         <button
-                          onClick={loginServiceInstance.logout}
+                          onClick={loginService.logout}
                           type="button"
                           className="nav-link"
                         >

@@ -2,9 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
 import lupaIcon from './imgs/lupa.png';
-import ServerService from '../../../services/ServerService';
-
-const server = new ServerService();
+import server from '../../../services/ServerService';
 
 function SearchBar() {
   const [query, setQuery] = useState('');
