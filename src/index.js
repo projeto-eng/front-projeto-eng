@@ -13,6 +13,7 @@ import Body from "./components/Bodys/body";
 import loginServiceInstance from "./services/LoginService";
 import React, { useState, useEffect } from "react";
 import School from "./components/School/School";
+import Init from "./components/Init/Init";
 
 export default function MainApp() {
   const [isLoggedIn, setIsLoggedIn] = useState(loginServiceInstance.isLoggedIn);
@@ -36,7 +37,7 @@ export default function MainApp() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Body />} />
+          <Route index element={isLoggedIn ? <Body /> : <Init />} />
           <Route path="login" element={isLoggedIn ? <Body /> : <Login />} />
           <Route
             path="cadastro"
