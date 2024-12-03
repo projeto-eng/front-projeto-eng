@@ -78,7 +78,7 @@ function SearchBar() {
   };
 
   return (
-    <div className="search-bar-container">
+    <div className="search-bar-container card">
       <div className="selected-filters">
         {selectedState && (
           <span className="filter-tag">
@@ -102,7 +102,7 @@ function SearchBar() {
           />
           <img src={lupaIcon} alt="Ícone de Busca" className="search-icon" onClick={fetchSchools} />
         </div>
-        <button className="filter-button" onClick={toggleFilters}>
+        <button className="filter-button btn" onClick={toggleFilters}>
           Filtros
         </button>
       </div>

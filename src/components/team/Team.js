@@ -14,9 +14,9 @@ function Team() {
   return (
     <div className="sub_page">
       <div className="hero_area">
-        <section className="team_section layout_padding">
+        <section className="team_section layout_padding section">
           <div className="container-fluid">
-            <div className="heading_container heading_center">
+            <div className="heading_container heading_center section-heading">
               <h2 className="">
                 Nosso <span> Time</span>
               </h2>
@@ -25,7 +25,7 @@ function Team() {
               <div className="row">
                 {integrantes.map((integrante, index) => (
                   <div className="col-lg-3 col-sm-6" key={index}>
-                    <div className="box">
+                    <div className="box card">
                       <div className="img-box">
                         <img src={user} className="img1" alt="" />
                       </div>
