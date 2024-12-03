@@ -11,6 +11,7 @@ import Cadastro from './components/Cadastro/Cadastro';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals'
+import Body from './components/Bodys/body';
 
 
 export default function MainApp() {
@@ -18,7 +19,7 @@ export default function MainApp() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route index element={<Init />} /> 
+          <Route index element={<Body />} /> 
           <Route path="login" element={<Login />} /> 
           <Route path="cadastro" element={<Cadastro />} /> 
           <Route path="team" element={<Team />} /> 

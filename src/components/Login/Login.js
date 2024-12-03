@@ -1,16 +1,27 @@
 // Login.js
 import React, { useState } from 'react';
 import './Login.css';
+import ServerService from '../../services/ServerService';
+
+const server = new ServerService();
 
 function Login() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [user, setEmail] = useState('');
+  const [pass, setPassword] = useState('');
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Aqui você pode adicionar a lógica de autenticação
-    console.log('Email:', email);
-    console.log('Password:', password);
+    const usuario = {
+      user,
+      pass
+    }
+
+    try {
+      const response = await server.post('/api/accounts/check-pass', usuario);
+      console.log(response);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   return (
@@ -20,14 +31,14 @@ function Login() {
         <input
           type="email"
           placeholder="Email"
-          value={email}
+          value={user}
           onChange={(e) => setEmail(e.target.value)}
           required
         />
         <input
           type="password"
           placeholder="Senha"
-          value={password}
+          value={pass}
           onChange={(e) => setPassword(e.target.value)}
           required
         />

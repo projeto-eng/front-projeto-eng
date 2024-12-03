@@ -1,6 +1,10 @@
 class ServerService {
     constructor(baseURL = 'http://127.0.0.1:8080') {
+        if (ServerService.instance) {
+            return ServerService.instance;
+        }
         this.baseURL = baseURL;
+        ServerService.instance = this;
     }
 
     async request(endpoint, method = 'GET', body = null, headers = {}) {

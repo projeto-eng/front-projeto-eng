@@ -1,4 +1,5 @@
 import SearchBar from './SearchBar/SearchBar';
+import LoginService from '../../services/LoginService';
 
 function Body() {
   const testedados = [
@@ -14,10 +15,11 @@ function Body() {
 
   const estados = Object.keys(cidades);
 
+  const loginService = new LoginService();
+
   return (
     <div className="search">
-      <h1>Barra de Pesquisa</h1>
-      <SearchBar data={testedados} cities={cidades} states={estados}/>
+      {!loginService.isLoggedIn && <SearchBar data={testedados} cities={cidades} states={estados}/>}
     </div>
   );
 }

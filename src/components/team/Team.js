@@ -4,12 +4,26 @@ import user from '../../assets/user.webp'
 
 import ServerService from "../../services/ServerService";
 
-const server = new ServerService()
+class ServerServiceSingleton {
+  constructor() {
+    if (!ServerServiceSingleton.instance) {
+      ServerServiceSingleton.instance = new ServerService();
+    }
+  }
+
+  getInstance() {
+    return ServerServiceSingleton.instance;
+  }
+}
+
+const serverSingleton = new ServerServiceSingleton();
+const server = new ServerService();
+
 const integrantes = await server.get('/api/configuracoes').then(
   (response) => {
-    return response?.integrantes
+    return response?.integrantes;
   }
-)
+);
 
 function Team() {
   return (
