@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="page">
       <Header />
-      <div className="content"> {/* Container para o conteúdo dinâmico */}
+      <div className="content">
         <Outlet />
       </div>
     </div>

@@ -1,66 +1,62 @@
 // SearchBar.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
-import lupaIcon from './imgs/lupa.png'; 
+import lupaIcon from './imgs/lupa.png';
+import ServerService from '../../../services/ServerService';
 
-function SearchBar({ data = [], cities = {}, states = [] }) {
+const server = new ServerService();
+
+function SearchBar() {
   const [query, setQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
-  const [stateQuery, setStateQuery] = useState('');
-  const [cityQuery, setCityQuery] = useState('');
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
-  const [activeSort, setActiveSort] = useState('');
+  const [schools, setSchools] = useState([]);
 
-  const toggleFilters = () => setShowFilters(!showFilters);
+  useEffect(() => {
+    fetchStates();
+  }, []);
 
-  const sortData = (data, key, direction = 'asc') => {
-    return [...data].sort((a, b) => {
-      if (typeof a[key] === 'string') {
-        return direction === 'asc'
-          ? a[key].localeCompare(b[key])
-          : b[key].localeCompare(a[key]);
-      } else {
-        return direction === 'asc' ? a[key] - b[key] : b[key] - a[key];
-      }
-    });
-  };
+  useEffect(() => {
+    if (selectedState) {
+      fetchCities(selectedState);
+    }
+  }, [selectedState]);
 
-  const handleSortClick = (type) => {
-    setActiveSort(type === activeSort ? '' : type);
-  };
-
-  const applySorting = (data) => {
-    switch (activeSort) {
-      case 'bestRating':
-        return sortData(data, 'evaluation', 'desc');
-      case 'worstRating':
-        return sortData(data, 'evaluation', 'asc');
-      case 'highestScore':
-        return sortData(data, 'enemScore', 'desc');
-      case 'lowestScore':
-        return sortData(data, 'enemScore', 'asc');
-      default:
-        return data;
+  const fetchStates = async () => {
+    try {
+      const response = await server.get('/api/enem-escola/ufs');
+      setStates(response);
+    } catch (error) {
+      console.error('Erro ao buscar estados:', error);
     }
   };
 
-  const filteredData = applySorting(
-    data.filter(item =>
-      item.name &&
-      item.name.toLowerCase().includes(query.toLowerCase()) &&
-      (!selectedCity || item.city === selectedCity) &&
-      (!selectedState || item.state === selectedState)
-    )
-  );
+  const fetchCities = async (siglaUf) => {
+    try {
+      const response = await server.get(`/api/enem-escola/municipios?siglaUf=${siglaUf}`);
+      setCities(response);
+    } catch (error) {
+      console.error('Erro ao buscar municípios:', error);
+    }
+  };
 
-  const filteredStates = states.filter(state =>
-    state.toLowerCase().includes(stateQuery.toLowerCase())
-  ).sort((a, b) => a.localeCompare(b));
+  const fetchSchools = async () => {
+    if (!selectedCity) return; // Garantindo que um município esteja selecionado
+    try {
+      const city = cities.find(city => city.nome === selectedCity);
+      const params = new URLSearchParams({ codigoMunicipio: city.id }).toString();
+  
+      const response = await server.get(`/api/enem-escola/escolas?${params}`);
+      setSchools(response);
+    } catch (error) {
+      console.error('Erro ao buscar escolas:', error);
+    }
+  };
 
-  const filteredCities = selectedState ? (cities[selectedState] || []).filter(city =>
-    city.toLowerCase().includes(cityQuery.toLowerCase())
-  ).sort((a, b) => a.localeCompare(b)) : [];
+  const toggleFilters = () => setShowFilters(!showFilters);
 
   return (
     <div className="search-bar-container">
@@ -85,83 +81,55 @@ function SearchBar({ data = [], cities = {}, states = [] }) {
             onChange={(e) => setQuery(e.target.value)}
             className="search-input"
           />
-          <img src={lupaIcon} alt="Ícone de Busca" className="search-icon" />
+          <img src={lupaIcon} alt="Ícone de Busca" className="search-icon" onClick={fetchSchools} />
         </div>
         <button className="filter-button" onClick={toggleFilters}>
           Filtros
         </button>
       </div>
-      {query && (
-        <>
-          {filteredData.length > 0 ? (
-            <ul className="results-list">
-              {filteredData.map((item, index) => (
-                <li 
-                  key={index} 
-                  className="result-item"
-                  onClick={() => setQuery(item.name)}
-                >
-                  {item.name} - Enem: {item.enemScore}, Avaliação: {item.evaluation}
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p>Nenhum resultado encontrado</p>
-          )}
-        </>
-      )}
       {showFilters && (
         <div className="filter-options">
           <div className="filter-option-pair">
             <div className="filter-option">
-              <input
-                type="text"
-                placeholder="Procure por estado..."
-                value={stateQuery}
-                onChange={(e) => setStateQuery(e.target.value)}
-                className="filter-input"
-              />
-              <ul className="filter-list">
-                {filteredStates.map((state, index) => (
-                  <li key={index} onClick={() => { setSelectedState(state); setStateQuery(''); }} className="filter-list-item">
-                    {state}
-                  </li>
+              <select
+                value={selectedState}
+                onChange={(e) => setSelectedState(e.target.value)}
+                className="filter-select"
+              >
+                <option value="">Selecione um estado</option>
+                {states.map((state) => (
+                  <option key={state.id} value={state.sigla}>
+                    {state.sigla}
+                  </option>
                 ))}
-              </ul>
+              </select>
             </div>
             <div className="filter-option">
-              <input
-                type="text"
-                placeholder="Procure por município..."
-                value={cityQuery}
-                onChange={(e) => setCityQuery(e.target.value)}
-                className="filter-input"
+              <select
+                value={selectedCity}
+                onChange={(e) => setSelectedCity(e.target.value)}
+                className="filter-select"
                 disabled={!selectedState}
-              />
-              <ul className="filter-list">
-                {filteredCities.map((city, index) => (
-                  <li key={index} onClick={() => setSelectedCity(city)} className="filter-list-item">
-                    {city}
-                  </li>
+              >
+                <option value="">Selecione um município</option>
+                {cities.map((city) => (
+                  <option key={city.id} value={city.nome}>
+                    {city.nome}
+                  </option>
                 ))}
-              </ul>
+              </select>
             </div>
           </div>
-          <div className="sort-buttons">
-            <button className={`sort-button ${activeSort === 'bestRating' ? 'active' : ''}`} onClick={() => handleSortClick('bestRating')}>
-              Melhor Avaliação ▲
-            </button>
-            <button className={`sort-button ${activeSort === 'worstRating' ? 'active' : ''}`} onClick={() => handleSortClick('worstRating')}>
-              Pior Avaliação ▼
-            </button>
-            <button className={`sort-button ${activeSort === 'highestScore' ? 'active' : ''}`} onClick={() => handleSortClick('highestScore')}>
-              Maior Nota do Enem ▲
-            </button>
-            <button className={`sort-button ${activeSort === 'lowestScore' ? 'active' : ''}`} onClick={() => handleSortClick('lowestScore')}>
-              Menor Nota do Enem ▼
-            </button>
-          </div>
         </div>
+      )}
+      {schools.length > 0 && (
+        <ul className="results-list">
+          {schools.map((school, index) => (
+            <li key={index} className="result-item">
+              {school.nomes[0]}
+            </li>
+          ))}
+        </ul>
       )}
     </div>
   );

@@ -1,23 +1,58 @@
+let instance;
+
 class LoginService {
     constructor(id = '') {
-        if (LoginService.instance) {
-            return LoginService.instance;
+        if (instance) {
+            return instance;
         }
-        this.id = id;
-        LoginService.instance = this;
+        instance = this;
+        this.id = this.getCookie('loginServiceId') || id;
+        this.subscribers = [];
     }
 
     login = (id) => {
         this.id = id;
+        this.setCookie('loginServiceId', id, 7); // Cookie expira em 7 dias
+        this.notifySubscribers();
     }
 
     logout = () => {
         this.id = '';
+        document.cookie = '';
+        this.notifySubscribers();
     }
 
-    get loggedIn() {
+    get isLoggedIn() {
         return this.id !== '';
+    }
+
+    subscribe(callback) {
+        this.subscribers.push(callback);
+    }
+
+    notifySubscribers() {
+        this.subscribers.forEach(callback => callback());
+    }
+
+    setCookie(name, value, days) {
+        const date = new Date();
+        date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+        const expires = "expires=" + date.toUTCString();
+        document.cookie = name + "=" + value + ";" + expires + ";path=/;SameSite=None;Secure";
+    }
+
+    getCookie(name) {
+        const nameEQ = name + "=";
+        const ca = document.cookie.split(';');
+        for(let i = 0; i < ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) === ' ') c = c.substring(1, c.length);
+            if (c.indexOf(nameEQ) === 0) return c.substring(nameEQ.length, c.length);
+        }
+        return null;
     }
 }
 
-export default LoginService;
+let loginServiceInstance = new LoginService();
+
+export default loginServiceInstance;
