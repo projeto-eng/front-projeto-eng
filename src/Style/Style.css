@@ -10974,6 +10974,85 @@ a:focus {
 
 @media (max-width: 1300px) {}
 
+.tooltip {
+  display: none;
+  position: absolute;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  z-index: 1;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+}
+
+li:hover .tooltip {
+  display: block;
+}
+
+.school-container {
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  margin: 30px auto;
+  max-width: 800px;
+}
+
+.school-header {
+  text-align: center;
+  margin-bottom: 25px;
+}
+
+.school-header h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.school-header .tooltip {
+  font-size: 1rem;
+  color: #666;
+  background-color: #f1f1f1;
+  padding: 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.school-location {
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.school-location h2 {
+  font-size: 1.8rem;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+.school-location p {
+  font-size: 1.2rem;
+  color: #777;
+}
+
+@media (max-width: 768px) {
+  .school-container {
+    padding: 20px;
+    margin: 20px;
+  }
+
+  .school-header h2 {
+    font-size: 2rem;
+  }
+
+  .school-location h2 {
+    font-size: 1.5rem;
+  }
+
+  .school-location p {
+    font-size: 1rem;
+  }
+}
+
 @media (max-width: 1120px) {}
 
 @media (max-width: 992px) {

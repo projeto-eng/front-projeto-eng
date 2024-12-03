@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './SearchBar.css';
 import lupaIcon from './imgs/lupa.png';
 import server from '../../../services/ServerService';
+import { useNavigate } from 'react-router-dom';
 
 function SearchBar() {
   const [query, setQuery] = useState('');
@@ -12,6 +13,7 @@ function SearchBar() {
   const [selectedState, setSelectedState] = useState('');
   const [selectedCity, setSelectedCity] = useState('');
   const [schools, setSchools] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     fetchStates();
@@ -70,6 +72,10 @@ function SearchBar() {
   };
 
   const toggleFilters = () => setShowFilters(!showFilters);
+
+  const handleSchoolClick = (id) => {
+    navigate(`/school/${id}`);
+  };
 
   return (
     <div className="search-bar-container">
@@ -138,7 +144,7 @@ function SearchBar() {
       {schools.length > 0 && (
         <ul className="results-list">
           {schools.map((school, index) => (
-            <li key={index} className="result-item">
+            <li key={index} className="result-item" onClick={() => handleSchoolClick(school.id)}>
               {school.nomes[0]}
             </li>
           ))}

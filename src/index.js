@@ -12,6 +12,7 @@ import reportWebVitals from "./reportWebVitals";
 import Body from "./components/Bodys/body";
 import loginServiceInstance from "./services/LoginService";
 import React, { useState, useEffect } from "react";
+import School from "./components/School/School";
 
 export default function MainApp() {
   const [isLoggedIn, setIsLoggedIn] = useState(loginServiceInstance.isLoggedIn);
@@ -45,6 +46,7 @@ export default function MainApp() {
           <Route path="about" element={<About />} />
           <Route path="services" element={<Services />} />
           <Route path="why-us" element={<WhyUs />} />
+          <Route path="school/:id" element={<School />} />
         </Route>
       </Routes>
     </BrowserRouter>
