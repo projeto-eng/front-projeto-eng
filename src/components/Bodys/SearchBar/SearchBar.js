@@ -26,7 +26,7 @@ function SearchBar() {
   const fetchStates = async () => {
     try {
       const response = await server.get('/api/enem-escola/ufs');
-      setStates(response);
+      setStates(response.sort((a, b) => a.sigla.localeCompare(b.sigla)));
     } catch (error) {
       console.error('Erro ao buscar estados:', error);
     }
@@ -35,20 +35,35 @@ function SearchBar() {
   const fetchCities = async (siglaUf) => {
     try {
       const response = await server.get(`/api/enem-escola/municipios?siglaUf=${siglaUf}`);
-      setCities(response);
+      // Ordena por ordem alfabética=
+      setCities(response.sort((a, b) => a.nome.localeCompare(b.nome)));
     } catch (error) {
       console.error('Erro ao buscar municípios:', error);
     }
   };
 
   const fetchSchools = async () => {
-    if (!selectedCity) return; // Garantindo que um município esteja selecionado
+    // É possível buscar escolas pelo seguinte critério:
+    // nome
+    // siglaUf
+    // codigoMunicipio
+
+    let params = "?";
+    if (selectedState) {
+      params += `siglaUf=${selectedState}&`;
+    }
+
+    if (selectedCity) {
+      params += `codigoMunicipio=${selectedCity}&`;
+    }
+
+    if (query) {
+      params += `nome=${query}`;
+    }
+
     try {
-      const city = cities.find(city => city.nome === selectedCity);
-      const params = new URLSearchParams({ codigoMunicipio: city.id }).toString();
-  
-      const response = await server.get(`/api/enem-escola/escolas?${params}`);
-      setSchools(response);
+      const response = await server.get('/api/enem-escola/escolas'+params);
+      setSchools(response.sort((a, b) => a.nomes[0].localeCompare(b.nomes[0])));
     } catch (error) {
       console.error('Erro ao buscar escolas:', error);
     }
