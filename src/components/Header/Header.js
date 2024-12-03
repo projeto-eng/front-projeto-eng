@@ -27,6 +27,14 @@ function Header() {
     window.location.href = "/";
   }
 
+  const renderNavItem = (path, label, icon) => (
+    <li className={`nav-item ${location.pathname === path ? "active" : ""}`}>
+      <NavLink className="nav-link" to={path}>
+        {icon && <i className={`fa fa-${icon}`} aria-hidden="true"></i>} {label}
+      </NavLink>
+    </li>
+  );
+
   return (
     <div className="sub_page">
       <div className="hero_area">
@@ -54,57 +62,25 @@ function Header() {
                 id="navbarSupportedContent"
               >
                 <ul className="navbar-nav">
-                  <li className={`nav-item ${location.pathname === "/" ? "active" : ""}`}>
-                    <NavLink className="nav-link" to="/">
-                      Inicio <span className="sr-only">(current)</span>
-                    </NavLink>
-                  </li>
-                  <li className={`nav-item ${location.pathname === "/about" ? "active" : ""}`}>
-                    <NavLink className="nav-link" to="/about">
-                      Sobre
-                    </NavLink>
-                  </li>
-                  <li className={`nav-item ${location.pathname === "/services" ? "active" : ""}`}>
-                    <NavLink className="nav-link" to="/services">
-                      Serviços
-                    </NavLink>
-                  </li>
-                  <li className={`nav-item ${location.pathname === "/why-us" ? "active" : ""}`}>
-                    <NavLink className="nav-link" to="/why-us">
-                      Por que nós
-                    </NavLink>
-                  </li>
-                  <li className={`nav-item ${location.pathname === "/team" ? "active" : ""}`}>
-                    <NavLink className="nav-link" to="/team">
-                      Equipe
-                    </NavLink>
-                  </li>
+                  {renderNavItem("/", "Inicio")}
+                  {renderNavItem("/about", "Sobre")}
+                  {renderNavItem("/services", "Serviços")}
+                  {renderNavItem("/why-us", "Por que nós")}
+                  {renderNavItem("/team", "Equipe")}
                   {isLoggedIn ? (
-                    <>
-                      <li className="nav-item">
-                        <button
-                          onClick={logout}
-                          type="button"
-                          className="nav-link"
-                        >
-                          Logout
-                        </button>
-                      </li>
-                    </>
+                    <li className="nav-item">
+                      <button
+                        onClick={logout}
+                        type="button"
+                        className="nav-link"
+                      >
+                        Logout
+                      </button>
+                    </li>
                   ) : (
                     <>
-                      <li className={`nav-item ${location.pathname === "/login" ? "active" : ""}`}>
-                        <NavLink className="nav-link" to="/login">
-                          <i className="fa fa-user" aria-hidden="true"></i>{" "}
-                          Login
-                        </NavLink>
-                      </li>
-                      <li className={`nav-item ${location.pathname === "/cadastro" ? "active" : ""}`}>
-                        <NavLink className="nav-link" to="/cadastro">
-                          <i className="fa fa-user" aria-hidden="true"></i>{" "}
-                          Cadastro
-                        </NavLink>
-                      </li>
+                      {renderNavItem("/login", "Login", "user")}
+                      {renderNavItem("/cadastro", "Cadastro", "user")}
                     </>
                   )}
                 </ul>
