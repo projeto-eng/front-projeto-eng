@@ -2,22 +2,7 @@ import "../../Style/Style.css"
 import 'popper.js';
 import user from '../../assets/user.webp'
 
-import ServerService from "../../services/ServerService";
-
-class ServerServiceSingleton {
-  constructor() {
-    if (!ServerServiceSingleton.instance) {
-      ServerServiceSingleton.instance = new ServerService();
-    }
-  }
-
-  getInstance() {
-    return ServerServiceSingleton.instance;
-  }
-}
-
-const serverSingleton = new ServerServiceSingleton();
-const server = new ServerService();
+import server from "../../services/ServerService";
 
 const integrantes = await server.get('/api/configuracoes').then(
   (response) => {

@@ -1,10 +1,8 @@
 // Cadastro.js
 import React, { useState } from 'react';
 import './Cadastro.css';
-import ServerService from '../../services/ServerService';
+import server from '../../services/ServerService';
 import { v4 as uuidv4 } from 'uuid';
-
-const server = new ServerService();
 
 function Cadastro() {
   const [isStudent, setIsStudent] = useState(false);
