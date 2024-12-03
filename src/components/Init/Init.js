@@ -94,11 +94,6 @@ function Init() {
                 </div>
               </div>
             </div>
-            <ol class="carousel-indicators">
-              <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
-              <li data-target="#customCarousel1" data-slide-to="1"></li>
-              <li data-target="#customCarousel1" da ta-slide-to="2"></li>
-            </ol>
           </div>
 
         </section><section class="info_section layout_padding2">

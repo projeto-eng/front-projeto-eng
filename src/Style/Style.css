@@ -13,16 +13,20 @@
   font-weight: 600;
   text-align: center;
   text-decoration: none;
-  background-color: #00bbf0;
-  color: #ffffff;
+  background-color: var(--primary);
+  color: var(--white);
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
+.btn:hover {
+  background-color: var(--primary-dark);
+}
+
 .logout-button {
-  background-color: #dc3545;
-  color: #ffffff;
+  background-color: var(--danger);
+  color: var(--white);
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -30,7 +34,7 @@
 }
 
 .logout-button:hover {
-  background-color: #c82333;
+  background-color: var(--danger-dark);
 }
 
 .btn:hover {
@@ -44,15 +48,15 @@
   font-weight: 600;
   text-align: center;
   text-decoration: none;
-  background-color: #00bbf0;
-  color: #ffffff;
+  background-color: var(--primary);
+  color: var(--white);
   border: none;
   border-radius: 5px;
   transition: background-color 0.3s ease;
 }
 
 .redirect-button:hover {
-  background-color: #007fa4;
+  background-color: var(--primary-dark);
 }
 
 /* Contêineres */
@@ -132,6 +136,11 @@ li:hover .tooltip {
 
   .section-heading p {
     font-size: 1rem;
+  }
+
+  .btn {
+    padding: 8px 16px;
+    font-size: 14px;
   }
 }
  :root {
@@ -6391,6 +6400,7 @@ li:hover .tooltip {
   .carousel-item-next,
   .carousel-item-prev {
     display: block;
+    background-color:white;
   }
   
   .carousel-item-next:not(.carousel-item-left),
@@ -10432,6 +10442,7 @@ a:focus {
           align-items: center;
   position: relative;
   padding: 45px 0 145px 0;
+  background-color:white;
 }
 
 .slider_section .row {
@@ -10454,11 +10465,11 @@ a:focus {
   font-weight: bold;
   text-transform: uppercase;
   margin-bottom: 15px;
-  color: #ffffff;
+  color: black;
 }
 
 .slider_section .detail-box p {
-  color: #fefefe;
+  color: black;
   font-size: 14px;
 }
 
@@ -10514,6 +10525,7 @@ a:focus {
   width: 100%;
   -webkit-animation: upDown 5s infinite;
           animation: upDown 5s infinite;
+  filter:invert(1);
 }
 
 @-webkit-keyframes upDown {
@@ -10656,7 +10668,6 @@ a:focus {
 }
 
 .about_section {
-  background-color: #00204a;
   color: #ffffff;
 }
 
@@ -10775,7 +10786,7 @@ a:focus {
 /*team section */
 .team_section {
   text-align: center;
-  background-color: #00204a;
+  background-color: #ffffff;
   color: #ffffff;
 }
 
@@ -10796,8 +10807,6 @@ a:focus {
   -webkit-transition: all .1s;
   transition: all .1s;
   margin-top: 45px;
-  background: -webkit-gradient(linear, left top, left bottom, from(#002759), to(#002b64));
-  background: linear-gradient(to bottom, #002759, #002b64);
 }
 
 .team_section .team_container .box .img-box {
@@ -10815,6 +10824,7 @@ a:focus {
 .team_section .team_container .box .img-box img {
   width: 120px;
   border-radius: 100%;
+  background: #ffffff;
   border: 5px solid #ffffff;
 }
 

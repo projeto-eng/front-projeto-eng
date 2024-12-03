@@ -65,7 +65,9 @@ function SearchPage() {
 
     try {
       const response = await server.get('/api/enem-escola/escolas'+params);
-      setSchools(response.sort((a, b) => a.nomes[0].localeCompare(b.nomes[0])));
+      const schools = response.sort((a, b) => a.nomes[0].localeCompare(b.nomes[0]));
+      const uniqueSchools = schools.filter((school, index, self) => self.findIndex(s => s.id === school.id) === index);
+      setSchools(uniqueSchools);
     } catch (error) {
       console.error('Erro ao buscar escolas:', error);
     }

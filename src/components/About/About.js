@@ -1,6 +1,6 @@
 import "../../Style/Style.css"
 import 'popper.js';
-import aboutimg from './imgs/about-img.png';
+import about_img from './imgs/about-img.png';
 import RedirectButton from "../RedirectButton/RedirectButton";
 
 
@@ -23,7 +23,7 @@ function About() {
           <div className="row">
             <div className="col-md-6">
               <div className="img-box">
-                <img src={aboutimg} alt="" />
+                <img src={about_img} alt="" />
               </div>
             </div>
             <div className="col-md-6">

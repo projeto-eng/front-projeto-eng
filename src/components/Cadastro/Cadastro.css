@@ -1,9 +1,9 @@
 /* Cadastro.css */
 .cadastro-container {
   max-width: 400px;
-  margin: 0 auto;
+  margin: 5% auto;
   padding: 20px;
-  background-color: #f0f8ff;
+  background-color: var(--light);
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
@@ -16,11 +16,12 @@
 
 .cadastro-form input[type="text"],
 .cadastro-form input[type="email"],
-.cadastro-form input[type="password"] {
+.cadastro-form input[type="password"],
+.cadastro-form input[type="date"] {
   width: 100%;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #ccc;
+  border: 1px solid var(--gray);
   font-size: 16px;
 }
 
@@ -30,30 +31,33 @@
   gap: 10px;
 }
 
-.cadastro-form button {
+.checkbox-label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   padding: 10px;
-  border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: white;
-  cursor: pointer;
+  border: 1px solid var(--gray);
   font-size: 16px;
-  transition: background-color 0.3s;
+  background-color: var(--light);
 }
 
+.cadastro-form button,
 .ok-button {
   padding: 10px;
   border: none;
   border-radius: 5px;
-  background-color: #007bff;
-  color: white;
+  background-color: var(--primary);
+  color: var(--white);
   cursor: pointer;
   font-size: 16px;
   transition: background-color 0.3s;
 }
 
-.cadastro-form button:hover {
-  background-color: #0056b3;
+.cadastro-form button:hover,
+.ok-button:hover {
+  background-color: var(--primary-dark);
 }
 
 .google-login {
