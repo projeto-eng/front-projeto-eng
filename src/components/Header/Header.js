@@ -35,6 +35,14 @@ function Header() {
     </li>
   );
 
+  const renderLogoutButton = () => (
+    <li className="nav-item">
+      <button onClick={logout} type="button" className="nav-link logout-button">
+        Logout
+      </button>
+    </li>
+  );
+
   return (
     <div className="sub_page">
       <div className="hero_area">
@@ -68,15 +76,7 @@ function Header() {
                   {renderNavItem("/why-us", "Por que nós")}
                   {renderNavItem("/team", "Equipe")}
                   {isLoggedIn ? (
-                    <li className="nav-item">
-                      <button
-                        onClick={logout}
-                        type="button"
-                        className="nav-link"
-                      >
-                        Logout
-                      </button>
-                    </li>
+                    renderLogoutButton()
                   ) : (
                     <>
                       {renderNavItem("/login", "Login", "user")}

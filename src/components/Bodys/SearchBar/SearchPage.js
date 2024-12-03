@@ -1,11 +1,11 @@
-// SearchBar.js
+// SearchPage.js
 import React, { useState, useEffect } from 'react';
-import './SearchBar.css';
+import './SearchPage.css';
 import lupaIcon from './imgs/lupa.png';
 import server from '../../../services/ServerService';
 import { useNavigate } from 'react-router-dom';
 
-function SearchBar() {
+function SearchPage() {
   const [query, setQuery] = useState('');
   const [showFilters, setShowFilters] = useState(false);
   const [states, setStates] = useState([]);
@@ -78,7 +78,7 @@ function SearchBar() {
   };
 
   return (
-    <div className="search-bar-container card">
+    <div className="search-page-container card">
       <div className="selected-filters">
         {selectedState && (
           <span className="filter-tag">
@@ -154,4 +154,4 @@ function SearchBar() {
   );
 }
 
-export default SearchBar;
+export default SearchPage;
