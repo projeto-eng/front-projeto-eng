@@ -4,6 +4,7 @@ import w1 from './imgs/w1.png';
 import w2 from './imgs/w2.png'; 
 import w3 from './imgs/w3.png'; 
 import w4 from './imgs/w4.png'; 
+import RedirectButton from "../RedirectButton/RedirectButton";
 
 function Header() {
   return (
@@ -65,9 +66,7 @@ function Header() {
             </div>
           </div>
           <div className="btn-box">
-            <a href="" className="btn">
-              Cadastre-se
-            </a>
+            <RedirectButton label="Cadastre-se" to="/cadastro" />
           </div>
         </div>
       </section>

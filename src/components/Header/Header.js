@@ -1,12 +1,12 @@
 import "../../Style/Style.css";
 import "popper.js";
 import React, { useState, useEffect } from "react";
-
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import loginService from "../../services/LoginService";
 
 function Header() {
   const [isLoggedIn, setIsLoggedIn] = useState(loginService.isLoggedIn);
+  const location = useLocation();
 
   useEffect(() => {
     const handleLoginChange = () => {
@@ -21,6 +21,11 @@ function Header() {
       );
     };
   }, []);
+
+  const logout = () => {
+    loginService.logout();
+    window.location.href = "/";
+  }
 
   return (
     <div className="sub_page">
@@ -49,27 +54,27 @@ function Header() {
                 id="navbarSupportedContent"
               >
                 <ul className="navbar-nav">
-                  <li className="nav-item active">
+                  <li className={`nav-item ${location.pathname === "/" ? "active" : ""}`}>
                     <NavLink className="nav-link" to="/">
                       Inicio <span className="sr-only">(current)</span>
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  <li className={`nav-item ${location.pathname === "/about" ? "active" : ""}`}>
                     <NavLink className="nav-link" to="/about">
                       Sobre
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  <li className={`nav-item ${location.pathname === "/services" ? "active" : ""}`}>
                     <NavLink className="nav-link" to="/services">
                       Serviços
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  <li className={`nav-item ${location.pathname === "/why-us" ? "active" : ""}`}>
                     <NavLink className="nav-link" to="/why-us">
                       Por que nós
                     </NavLink>
                   </li>
-                  <li className="nav-item">
+                  <li className={`nav-item ${location.pathname === "/team" ? "active" : ""}`}>
                     <NavLink className="nav-link" to="/team">
                       Equipe
                     </NavLink>
@@ -78,7 +83,7 @@ function Header() {
                     <>
                       <li className="nav-item">
                         <button
-                          onClick={loginService.logout}
+                          onClick={logout}
                           type="button"
                           className="nav-link"
                         >
@@ -88,13 +93,13 @@ function Header() {
                     </>
                   ) : (
                     <>
-                      <li className="nav-item">
+                      <li className={`nav-item ${location.pathname === "/login" ? "active" : ""}`}>
                         <NavLink className="nav-link" to="/login">
                           <i className="fa fa-user" aria-hidden="true"></i>{" "}
                           Login
                         </NavLink>
                       </li>
-                      <li className="nav-item">
+                      <li className={`nav-item ${location.pathname === "/cadastro" ? "active" : ""}`}>
                         <NavLink className="nav-link" to="/cadastro">
                           <i className="fa fa-user" aria-hidden="true"></i>{" "}
                           Cadastro

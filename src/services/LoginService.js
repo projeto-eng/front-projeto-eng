@@ -7,6 +7,7 @@ class LoginService {
         }
         instance = this;
         this.id = this.getCookie('loginServiceId') || id;
+        console.log('LoginService id:', this.id);
         this.subscribers = [];
     }
 
@@ -18,7 +19,7 @@ class LoginService {
 
     logout = () => {
         this.id = '';
-        document.cookie = '';
+        this.setCookie('loginServiceId', '', -1); // Expira cookie
         this.notifySubscribers();
     }
 

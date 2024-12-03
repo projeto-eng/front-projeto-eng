@@ -1,6 +1,7 @@
 import "../../Style/Style.css"
 import 'popper.js';
 import aboutimg from './imgs/about-img.png';
+import RedirectButton from "../RedirectButton/RedirectButton";
 
 
 function About() {
@@ -38,9 +39,7 @@ function About() {
                   fornecendo as ferramentas necessárias para que todos os envolvidos no processo educacional possam fazer escolhas informadas e trabalhar juntos para elevar o padrão de ensino em nosso país.
                   Cadastre-se agora e junte-se a nós nessa missão de transformar a educação através da informação!
                 </p>
-                <a href="" className="btn">
-                  Cadastre-se
-                </a>
+                <RedirectButton label="Cadastre-se" to="/cadastro" />
               </div>
             </div>
           </div>

@@ -2,6 +2,7 @@ import "../../Style/Style.css"
 import 'popper.js';
 import imgslider from './imgs/slider-img.png';
 import bgimg from './imgs/hero-bg.png';
+import RedirectButton from '../RedirectButton/RedirectButton';
 
 function Init() {
   return (
@@ -30,9 +31,7 @@ function Init() {
                           Acesse dados sobre estrutura, qualidade do ensino e avaliações de diversas escolas públicas.
                         </p>
                         <div class="btn-box">
-                          <a href="" class="btn1">
-                            Cadastre-se
-                          </a>
+                          <RedirectButton label="Cadastre-se" to="/cadastro" />
                         </div>
                       </div>
                     </div>
@@ -57,9 +56,7 @@ function Init() {
                           Compartilhe sua experiência e ajude outros a entender melhor a qualidade da educação oferecida.
                         </p>
                         <div class="btn-box">
-                          <a href="" class="btn1">
-                            Registre-se
-                          </a>
+                          <RedirectButton label="Registre-se" to="/registro" />
                         </div>
                       </div>
                     </div>
@@ -84,9 +81,7 @@ function Init() {
                           Consulte o desempenho das escolas públicas nas últimas edições do Enem, comparando resultados.
                         </p>
                         <div class="btn-box">
-                          <a href="" class="btn1">
-                            Registre-se
-                          </a>
+                          <RedirectButton label="Registre-se" to="/registro" />
                         </div>
                       </div>
                     </div>
@@ -102,7 +97,7 @@ function Init() {
             <ol class="carousel-indicators">
               <li data-target="#customCarousel1" data-slide-to="0" class="active"></li>
               <li data-target="#customCarousel1" data-slide-to="1"></li>
-              <li data-target="#customCarousel1" data-slide-to="2"></li>
+              <li data-target="#customCarousel1" da ta-slide-to="2"></li>
             </ol>
           </div>
 
@@ -126,34 +121,26 @@ function Init() {
                       Links
                     </h4>
                     <div class="info_links">
-                      <a class="active" href="index.html">
+                      <a class="active" href="/">
                         Inicio
                       </a>
-                      <a class="" href="about.html">
+                      <a class="" href="/about">
                         Sobre
                       </a>
-                      <a class="" href="service.html">
+                      <a class="" href="/services">
                         Serviços
                       </a>
-                      <a class="" href="why.html">
+                      <a class="" href="/why-us">
                         Por que nós
                       </a>
-                      <a class="" href="team.html">
+                      <a class="" href="team">
                         Equipe
                       </a>
                     </div>
                   </div>
                 </div>
                 <div class="col-md-6 col-lg-3 info_col ">
-                  <h4>
-                    Cadastre-se
-                  </h4>
-                  <form action="#">
-                    <input type="text" placeholder="Enter email" />
-                    <button type="submit">
-                      Cadastre-se
-                    </button>
-                  </form>
+                  <RedirectButton label="Cadastre-se" to="/cadastro" />
                 </div>
               </div>
             </div>
